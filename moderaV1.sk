@@ -42,6 +42,7 @@ command /modera [<text>] [<player>] [<text>]:
       send "Frissítések keresése..."
       wait 2 seconds
       send "&aÚj verzió érhető  el! V1.1"
+      send "Link: https://github.com/Dzsozseff/moderaV1.1.sk"
 
     if arg-1 is "version":
       send "A jelenlegi &c&l[modera]&l&c &fverzió: &lV1"
