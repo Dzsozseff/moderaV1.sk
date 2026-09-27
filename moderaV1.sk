@@ -1,0 +1,93 @@
+# made by: joci12_
+command /modera [<text>] [<player>] [<text>]:
+  permission: modera.modera
+  permission message: &cEhhez a parancshoz nincs jogod!
+
+  trigger:
+    if arg-1 is "help":
+      send "/modera commands"
+      stop
+
+    if arg-1 is "ban":
+      execute player command "ban %arg-2%"
+      stop
+
+    if arg-1 is "unban":
+      execute player command "unban %arg-2%"
+
+    if arg-1 is "kick":
+      execute player command "kick %arg-2%"
+      stop
+      
+    if arg-1 is "commands":
+      send "Parancsok:"
+      send ""
+      send "/ban <játékosnév> &7[/modera ban <játékosnév>]"
+      send "/unban <játékosnév> &7[/modera unban <játékosnév>"
+      send "/kick <játékosnév> &7[/modera kick <játékosnév>]"
+      send "/modera update"
+      send "/modera help"
+      send "/modera version"
+      send "/modera"
+      stop
+
+    if arg-1 is not set:
+      send "    &c&l[modera]"
+      send "         V1"
+      send ""
+      send "  Made by: joci12_"
+      send "   /modera help"
+
+    if arg-1 is "update":
+      send "Frissítések keresése..."
+      wait 2 seconds
+      send "&aÚj verzió érhető  el! V1.1"
+
+    if arg-1 is "version":
+      send "A jelenlegi &c&l[modera]&l&c &fverzió: &lV1"
+
+command /ban [<player>] [<text>]:
+  permission: modera.ban
+  permission message: &cEhhez a parancshoz nincs jogod!
+
+  trigger:
+    if arg-1 is not set:
+      send "&cAdj meg egy játékosnevet!"
+      stop
+
+    if arg-2 is not set:
+      execute console command "minecraft:ban %arg-1% &c%player%&c &fkitiltott téged! %newline% &fIndok: &c-"
+      broadcast "&7[&7&c&lBAN&l&c&7]&7 &c%player%&c &fkitiltotta &c%arg-1%&c &fjátékost! Indok: &c-"
+      stop
+
+    execute console command "minecraft:ban %arg-1% &c%player%&c &fkitiltott téged! %newline% &fIndok: &c%arg-2%"
+    broadcast "&7[&7&c&lBAN&l&c&7]&7 &c%player%&c &fkitiltotta &c%arg-1%&c &fjátékost! Indok: &c%arg-2%"
+
+command /unban [<text>]:
+  permission: modera.unban
+  permission message: &cEhhez a parancshoz nincs jogod!
+
+  trigger:
+    if arg-1 is not set:
+      send "&cAdj meg egy játékosnevet!"
+      stop
+
+    broadcast "&7[&7&c&lUNBAN&l&c&7]&7 &c%player%&c &ffeloldotta &c%arg-1%&c &ftiltását!"
+    execute console command "/minecraft:pardon %arg-1%"
+
+command /kick [<player>] [<text>]:
+  permission: modera.kick
+  permission message: &cEhhez a parancshoz nincs jogod!
+
+  trigger:
+    if arg-1 is not set:
+      send "&cAdj meg egy játékosnevet!"
+      stop
+
+    if arg-2 is not set:
+      broadcast "&7[&7&c&lKICK&l&c&7]&7 &c%player% &fkirúgta &c%arg-1%&c &fjátékost! Indok: &c-"
+      execute console command "minecraft:kick %arg-1% &c%player%&c &fkirúgott téged! %newline% Indok: &c-"
+      stop
+
+    execute console command "minecraft:kick %arg-1% &c%player%&c &fkirúgott téged! %newline% &fIndok: &c%arg-2%"
+    broadcast "&7[&7&c&lKICK&l&c&7]&7 &c%player% &fkirúgta &c%arg-1%&c &fjátékost! Indok: &c%arg-2%"
